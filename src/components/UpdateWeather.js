@@ -1,7 +1,6 @@
 import { React } from "react"
-import { View, SafeAreaView, StyleSheet, FlatList, StatusBar } from "react-native"
+import { View,Text, SafeAreaView, StyleSheet, FlatList, StatusBar } from "react-native"
 
-import React from 'react'
 const data = [{
   id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
   title: 'First Item',
@@ -21,14 +20,21 @@ const Item = (props) => {
     <Text>{title}</Text></>)
 }
 export default function UpdateWeather() {
+  const renderItem = ({ item }) => {
+    return <Item data={item} />;
+  };
+
   return (
     <SafeAreaView>
       <View styles={styles.container}>
-        <FlatList data={data} renderItem={(item) => { <Item data={item} /> }} keyExtractor={(item) => { item.id }} />
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
       </View>
-
     </SafeAreaView>
-  )
+  );
 }
 const styles = StyleSheet.create(
   {
@@ -44,3 +50,5 @@ const styles = StyleSheet.create(
     }
   }
 )
+
+//keyExtractor={(item) => { item.id }}
