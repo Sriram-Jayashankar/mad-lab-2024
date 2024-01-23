@@ -1,12 +1,18 @@
-import CurrentWeather from "./src/components/CurrentWeather"
+import CurrentWeather from "./src/screens/CurrentWeather"
 import {React} from "react"
-import {View,StyleSheet} from "react-native"
-import UpdateWeather from "./src/components/UpdateWeather"
+import {View,Text,StyleSheet} from "react-native"
+import { StatusBar } from 'expo-status-bar';
+import UpdateWeather from "./src/screens/UpdateWeather";
+import InitialScreen from "./src/screens/InitialScreen"
+import LoginScreen from "./src/screens/LoginScreen";
+import SignupScreen from "./src/screens/SignupScreen";
 const app=()=>
 {
   return(
-    <View style={styles.  mainview}>
-    <UpdateWeather/>
+    <View className="flex-1 ">
+      {/* <InitialScreen/> */}
+      {/* <LoginScreen/> */}
+      <SignupScreen/>
     </View>
   )
 }
