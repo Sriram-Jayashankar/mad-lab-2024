@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -7,33 +7,40 @@ const ReportFoundPet = ({}) => {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [imageUri, setImageUri] = useState(null);
+  const [permissionStatus, setPermissionStatus] = useState(null);
+
+
+  useEffect(() => {
+    (async () => {
+      const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setPermissionStatus(galleryStatus.status === "granted");
+    })();
+  }, []);
+
 
   const selectImage = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionStatus) {
     
-    if (status !== 'granted') {
-      console.error('Permission to access media library was denied');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: false,
+        quality: 1,
+      });
 
     if (!result.cancelled) {
       setImageUri(result.uri);
     }
+    else{
+      console.log("Permission not granted");
+    }
   };
-
+  }
   const reportFoundPet = () => {
     // Handle reporting logic with petType, description, location, and imageUri
     console.log('Pet Type:', petType);
     console.log('Description:', description);
     console.log('Location:', location);
-    console.log('Image URI:', imageUri);
+    // console.log('Image URI:', imageUri);
   };
 
   return (

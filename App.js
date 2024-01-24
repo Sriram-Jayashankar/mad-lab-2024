@@ -20,8 +20,8 @@ const app=()=>
       {/* <LoginScreen/> */}
       {/* <SignupScreen/> */}
       {/* <DogItem dog={dog}/> */}
-      {/* <ReportFoundPet/> */}
-      <ImagePickerExample/>
+      <ReportFoundPet/>
+      {/* <ImagePickerExample/> */}
       {/* <FoundPets/> */}
     </View>
   )
