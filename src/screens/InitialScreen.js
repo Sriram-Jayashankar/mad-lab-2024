@@ -1,7 +1,10 @@
 import React from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const InitialScreen = ({navigation}) => {
+    const user=useSelector((state)=>state.auth.user)
+  console.log(user);
     return (
         <SafeAreaView className="flex-1 bg-gray-900">
             <View className="flex-1 flex justify-around my-4 ">
