@@ -1,27 +1,31 @@
 import { React } from "react"
-import { Provider,useSelector } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './store';
 import Navigation from "./Navigation";
+import ReportFoundPet from "./src/screens/ReportFoundPet";
 
 
 const app = () => {
-  
+
   return (
-    // <View className="flex-1 ">
-    //   {/* <InitialScreen/> */}
-    //   {/* <LoginScreen/> */}
-    //   {/* <SignupScreen/> */}
-    //   {/* <DogItem dog={dog}/> */}
-    //   {/* <ReportFoundPet/> */}
-    //   {/* <ImagePickerExample/> */}
-    //   {/* <FoundPets/> */}
-    //   {/* <UserProfile/> */}
-    // </View>
-    
+
+
     <Provider store={store}>
-      <Navigation/>
+      {/* <Navigation /> */}
+      <ReportFoundPet/>
     </Provider>
   )
 }
 
 export default app
+
+// <View className="flex-1 ">
+//   {/* <InitialScreen/> */}
+//   {/* <LoginScreen/> */}
+//   {/* <SignupScreen/> */}
+//   {/* <DogItem dog={dog}/> */}
+//   {/* <ReportFoundPet/> */}
+//   {/* <ImagePickerExample/> */}
+//   {/* <FoundPets/> */}
+//   {/* <UserProfile/> */}
+// </View>

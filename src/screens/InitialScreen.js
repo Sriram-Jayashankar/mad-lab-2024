@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { loadUserFromStorage } from '../../authActions';
+import { CommonActions, useNavigation } from "@react-navigation/native";
 
-const InitialScreen = ({navigation}) => {
+const InitialScreen = () => {
     const user=useSelector((state)=>state.auth.user)
-  console.log(user);
+//   console.log(user);
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+  useEffect(() => {
+    const checkUser = async () => {
+      // Load user from AsyncStorage during startup
+       console.log('User from state:', user);
+      // If user data is found, navigate to the appropriate screen
+      if (user) {
+        if (user.role === "admin") {
+          navigation.dispatch(CommonActions.navigate({ name: "AdminFinal" }));
+        } else if(user.role === "user") {
+          navigation.dispatch(CommonActions.navigate({ name: "UserFinal" }));
+        }
+      } else {
+        // If no user data is found, navigate to the login screen
+        navigation.dispatch(CommonActions.navigate({ name: "InitialScreen" }));
+      }
+    };
+
+    checkUser();
+  }, []);
+
     return (
         <SafeAreaView className="flex-1 bg-gray-900">
             <View className="flex-1 flex justify-around my-4 ">
