@@ -8,7 +8,7 @@ const ReportFoundPet = ({}) => {
   const [location, setLocation] = useState('');
   const [imageUri, setImageUri] = useState(null);
   const [permissionStatus, setPermissionStatus] = useState(null);
-
+  const [isImageSelected, setIsImageSelected] = useState(false); // Track whether an image has been selected
 
   useEffect(() => {
     (async () => {
@@ -17,24 +17,24 @@ const ReportFoundPet = ({}) => {
     })();
   }, []);
 
-
   const selectImage = async () => {
     if (permissionStatus) {
-    
-    let result = await ImagePicker.launchImageLibraryAsync({
+      let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: false,
         quality: 1,
       });
 
-    if (!result.cancelled) {
-      setImageUri(result.uri);
-    }
-    else{
-      console.log("Permission not granted");
+      if (!result.cancelled) {
+        setImageUri(result.uri);
+        setIsImageSelected(true); // Set the flag to true when an image is selected
+      }
+      else {
+        console.log("Permission not granted");
+      }
     }
   };
-  }
+
   const reportFoundPet = () => {
     // Handle reporting logic with petType, description, location, and imageUri
     console.log('Pet Type:', petType);
@@ -50,13 +50,13 @@ const ReportFoundPet = ({}) => {
       </View>
       <View style={styles.body}>
         <View style={styles.imageContainer}>
-          {imageUri ? (
+          {imageUri && (
             <Image style={styles.image} source={{ uri: imageUri }} />
-          ) : (
-            <TouchableOpacity onPress={selectImage}>
-              <Text style={styles.imagePlaceholderText}>Select Image</Text>
-            </TouchableOpacity>
           )}
+            <TouchableOpacity onPress={selectImage}>
+              <Text style={styles.imagePlaceholderText}>{isImageSelected ? 'Change Image' : 'Select Image'}</Text>
+            </TouchableOpacity>
+          
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     marginBottom: 20,
+
   },
   image: {
     width: 150,

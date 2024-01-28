@@ -10,6 +10,7 @@ import DogItem from "./src/components/DogItem";
 import ReportFoundPet from "./src/screens/ReportFoundPet";
 import ImagePickerExample from "./src/test/imagepickertest";
 import FoundPets from "./src/screens/FoundPets";
+import UserProfile from "./src/screens/UserProfile";
 const app=()=>
 {
   const dog={src:"https://w7.pngwing.com/pngs/333/414/png-transparent-dog-cartoon-cat-tongue-puppy-white-mammal-child.png",
@@ -20,9 +21,10 @@ const app=()=>
       {/* <LoginScreen/> */}
       {/* <SignupScreen/> */}
       {/* <DogItem dog={dog}/> */}
-      <ReportFoundPet/>
+      {/* <ReportFoundPet/> */}
       {/* <ImagePickerExample/> */}
       {/* <FoundPets/> */}
+      <UserProfile/>
     </View>
   )
 }
