@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     return(
         <SafeAreaView className="flex-1 bg-gray-900">
             <View className="flex-row justify-center mt-20 ">
@@ -23,7 +23,7 @@ const LoginScreen = () => {
                 <TouchableOpacity className=" flex-0 bg-black rounded-lg p-2 my-4">
                     <Text className="text-white font-bold text-center text-xl">Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity className="flex-row justify-center my-3">
+                <TouchableOpacity className="flex-row justify-center my-3" onPress={()=>{navigation.navigate("Signup")}}>
                     <Text className="text-gray-700">Don't have an account? </Text>
                     <Text className="text-blue-500">Sign Up</Text>
                 </TouchableOpacity>
