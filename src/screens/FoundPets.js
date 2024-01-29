@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, Text, Image, StyleSheet } from 'react-native';
-import DogItem from '../components/DogItem';
+import DogItem from '../components/basic/DogItem';
 
 const FoundPets = () => {
   const foundPets = [
