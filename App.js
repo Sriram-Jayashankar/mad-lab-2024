@@ -2,7 +2,7 @@ import { React } from "react"
 import { Provider, useSelector } from 'react-redux';
 import store from './Store';
 import Navigation from "./Navigation";
-import ReportFoundPet from "./src/screens/ReportFoundPet";
+import ReportFoundPet from "./src/screens/screentemplates/ReportFoundPet";
 
 
 const app = () => {
