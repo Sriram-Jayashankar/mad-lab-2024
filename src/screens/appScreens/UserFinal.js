@@ -1,7 +1,7 @@
 import {React} from "react"
 import {View,Text,StyleSheet} from "react-native"
 import { StatusBar } from 'expo-status-bar';
-import LogoutButton from "../components/Logoutbutton";
+import LogoutButton from "../../components/basic/Logoutbutton";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import LostPets from "./LostPets";
 import FoundPets from "./FoundPets";

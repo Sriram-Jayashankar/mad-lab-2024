@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAlert } from './redux/alertSlice'; // Create this action in your alertSlice
+import { clearAlert } from '../redux/alertSliceRedux';
 
 const Alert = () => {
   const dispatch = useDispatch();

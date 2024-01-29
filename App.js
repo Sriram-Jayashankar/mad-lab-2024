@@ -1,8 +1,9 @@
+import 'react-native-gesture-handler';
 import { React } from "react"
 import { Provider, useSelector } from 'react-redux';
-import store from './store';
+import store from './src/components/redux/store';
 import Navigation from "./Navigation";
-import ReportFoundPet from "./src/screens/ReportFoundPet";
+import ReportFoundPet from "./src/screens/appScreens/ReportFoundPet";
 
 
 const app = () => {

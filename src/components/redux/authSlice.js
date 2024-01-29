@@ -1,19 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Loadfromstorage=async()=>{
-    try{
-        const storedsuserdata=await AsyncStorage.getItem("userData");
-        return storedsuserdata ? JSON.parse(storedsuserdata):null
-    }
-    catch(e)
-    {
-        console.log("error that has been obtained while getting data from app is "+{e})
-        return null
-    }
-}
+
 const initialState ={
-    user: Loadfromstorage()
+    user: null
 }
 
  const authSlice=createSlice(

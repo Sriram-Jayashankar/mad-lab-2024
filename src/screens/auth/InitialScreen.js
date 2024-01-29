@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector,useDispatch } from 'react-redux';
-import { loadUserFromStorage } from '../../authActions';
+import { loadUserFromStorage } from '../../components/redux/authActions';
 import { CommonActions, useNavigation } from "@react-navigation/native";
 
 const InitialScreen = () => {

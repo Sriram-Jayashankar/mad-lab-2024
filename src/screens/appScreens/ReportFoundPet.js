@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { RadioButton } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { setAlert } from '../../components/redux/alertSliceRedux';
 
 const ReportFoundPet = ({}) => {
   const [petType, setPetType] = useState('');
@@ -11,6 +13,15 @@ const ReportFoundPet = ({}) => {
   const [permissionStatus, setPermissionStatus] = useState(null);
   const [isImageSelected, setIsImageSelected] = useState(false); // Track whether an image has been selected
   const [reportType, setReportType] = useState(null); // Track the selected report type
+
+  
+
+  const dispatch = useDispatch();
+
+  const showAlert = () => {
+    dispatch(setAlert('Your message goes here!'));
+  };
+
 
   useEffect(() => {
     (async () => {
@@ -38,6 +49,7 @@ const ReportFoundPet = ({}) => {
 
   const reportFoundPet = () => {
     // Handle reporting logic with petType, description, location, and imageUri
+    showAlert();
     console.log('Pet Type:', petType);
     console.log('Description:', description);
     console.log('Location:', location);
