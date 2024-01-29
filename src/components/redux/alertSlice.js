@@ -4,11 +4,11 @@ const alertSlice=createSlice(
     {
         name:"alert",
         initialState:{
-            messsage:null
+            message:null
         },
         reducers:{
             setAlert:(state,action)=>{
-                state.messsage=action.payload
+                state.message=action.payload
             },
             clearAlert: (state) => {
                 state.message = null;

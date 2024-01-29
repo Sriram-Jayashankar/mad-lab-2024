@@ -1,9 +1,9 @@
 import React from 'react'
+import { View } from 'react-native'
 
 export default function ValidateFoundPet() {
   return (
-    <div>
-      
-    </div>
+    <View></View>
+
   )
 }

@@ -1,25 +1,29 @@
 import React from "react";
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 import ValidateFoundPet from "./ValidateFoundPet";
 import ValidateLostPet from "./ValidateLostPet";
 import ValidateNewAdmin from "./ValidateNewAdmin";
 import FoundPets from "../screentemplates/FoundPets";
 import ReportFoundPet from "../screentemplates/ReportFoundPet";
-import { View } from "react-native";
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 
-// const Drawer = createDrawerNavigator();
+import { View } from "react-native";
+const Tab=createMaterialBottomTabNavigator();
+
 
 const AdminFinal = () => {
     return (
-        // <Drawer.Navigator>
-        //     <Drawer.Screen name="FoundPets" component={FoundPets} />
-        //     <Drawer.Screen name="ReportFoundPet" component={ReportFoundPet} />
+        <NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name="FoundPets" component={FoundPets} />
+            <Tab.Screen name="ReportFoundPet" component={ReportFoundPet} />
 
-        //     <Drawer.Screen name="ValidateFoundPet" component={ValidateFoundPet} />
-        //     <Drawer.Screen name="ValidateLostPet" component={ValidateLostPet} />
-        //     <Drawer.Screen name="ValidateNewAdmin" component={ValidateNewAdmin} />
-        // </Drawer.Navigator>
-        <View></View>
+            <Tab.Screen name="ValidateFoundPet" component={ValidateFoundPet} />
+            <Tab.Screen name="ValidateLostPet" component={ValidateLostPet} />
+            <Tab.Screen name="ValidateNewAdmin" component={ValidateNewAdmin} />
+        </Tab.Navigator>
+        </NavigationContainer>
+
     )
 }
 

@@ -12,7 +12,7 @@ const app = () => {
 
 
     <Provider store={store}>
-      <Navigation />
+      {/* <Navigation /> */}
       {/* <ReportFoundPet/> */}
       <AdminFinal/>
     </Provider>
