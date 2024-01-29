@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInpu
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {signIn} from "../../../authActions"
+import {signIn} from "../../components/redux/authActions"
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');

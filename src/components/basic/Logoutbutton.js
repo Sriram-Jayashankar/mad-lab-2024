@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { signOut } from '../../../authActions';
+import { signOut } from '../redux/authActions';
 import { useNavigation } from '@react-navigation/native';
 
 
