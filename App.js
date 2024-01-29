@@ -11,8 +11,8 @@ const app = () => {
 
 
     <Provider store={store}>
-      {/* <Navigation /> */}
-      <ReportFoundPet/>
+      <Navigation />
+      {/* <ReportFoundPet/> */}
     </Provider>
   )
 }
