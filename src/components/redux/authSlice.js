@@ -13,7 +13,7 @@ const Loadfromstorage=async()=>{
     }
 }
 const initialState ={
-    user: Loadfromstorage()
+    user: null
 }
 
  const authSlice=createSlice(

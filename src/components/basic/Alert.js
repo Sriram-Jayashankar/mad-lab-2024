@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAlert } from './redux/alertSlice'; // Create this action in your alertSlice
+import { clearAlert } from '../redux/alertSlice';
 
 const Alert = () => {
   const dispatch = useDispatch();
   const alert = useSelector((state) => state.alert);
-
   const fadeAnim = new Animated.Value(0);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const Alert = () => {
     }).start(() => {
       setTimeout(() => {
         hideAlert();
-      }, 1000); // Hide the alert after 1 second
+      }, 1000);
     });
   };
 
@@ -36,6 +35,10 @@ const Alert = () => {
       dispatch(clearAlert());
     });
   };
+
+  if (!alert.message) {
+    return null; // Do not render anything if there is no message
+  }
 
   return (
     <Animated.View

@@ -7,15 +7,21 @@ import LostPets from "./screentemplates/LostPets";
 import FoundPets from "./screentemplates/FoundPets";
 import ReportFoundPet from "./screentemplates/ReportFoundPet";
 import Alert from "../components/basic/Alert";
+import { NavigationContainer } from '@react-navigation/native';
+
 const Tab=createMaterialBottomTabNavigator();
 const UserFinal=()=>{
     return(
         <>
-        <Alert/>
+        
+        <NavigationContainer>
+        
         <Tab.Navigator>
             <Tab.Screen name="foundpets" component={FoundPets}/>
             <Tab.Screen name="report" component={ReportFoundPet}/>
         </Tab.Navigator>
+        <Alert/>
+        </NavigationContainer>
         </>
     )
 }

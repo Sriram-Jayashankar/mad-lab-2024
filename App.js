@@ -4,6 +4,7 @@ import store from './src/components/redux/Store';
 import Navigation from "./Navigation";
 import ReportFoundPet from "./src/screens/screentemplates/ReportFoundPet";
 import AdminFinal from "./src/screens/admin/Adminfinal";
+import UserFinal from "./src/screens/UserFinal";
 
 
 const app = () => {
@@ -14,7 +15,8 @@ const app = () => {
     <Provider store={store}>
       {/* <Navigation /> */}
       {/* <ReportFoundPet/> */}
-      <AdminFinal/>
+      {/* <AdminFinal/> */}
+      <UserFinal/>
     </Provider>
   )
 }

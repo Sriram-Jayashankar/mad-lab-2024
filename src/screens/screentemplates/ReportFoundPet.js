@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { RadioButton } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { setAlert,clearAlert } from '../../components/redux/alertSlice';
+
 
 const ReportFoundPet = ({}) => {
   const [petType, setPetType] = useState('');
@@ -11,7 +14,7 @@ const ReportFoundPet = ({}) => {
   const [permissionStatus, setPermissionStatus] = useState(null);
   const [isImageSelected, setIsImageSelected] = useState(false); // Track whether an image has been selected
   const [reportType, setReportType] = useState(null); // Track the selected report type
-
+  const dispatch = useDispatch()
   useEffect(() => {
     (async () => {
       const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -38,12 +41,21 @@ const ReportFoundPet = ({}) => {
 
   const reportFoundPet = () => {
     // Handle reporting logic with petType, description, location, and imageUri
+
     console.log('Pet Type:', petType);
     console.log('Description:', description);
     console.log('Location:', location);
     console.log('Image URI:', imageUri);
     console.log('Report Type:', reportType);
+    dispatch(setAlert("pls help me find my dog"));
+
+    // // Optional: You can clear the alert after a certain duration
+    // setTimeout(() => {
+    //   dispatch(clearAlert());
+    // }, 5000); // Clear alert after 5 seconds (adjust as needed)
   };
+  
+
 
   return (
     <SafeAreaView style={styles.container}>
