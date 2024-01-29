@@ -18,7 +18,7 @@ const LoginScreen = () => {
             role: role,
           };
           dispatch(signIn(userData));
-          {role==="admin"?navigation.navigate("AdminFinal"):navigation.navigate("UserFinal")}
+          {role==="admin"?navigation.navigate("UserFinal"):navigation.navigate("UserFinal")}
 
         }
     return(
