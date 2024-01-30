@@ -8,6 +8,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 
 import { View } from "react-native";
+import LostPets from "../screentemplates/LostPets";
 const Tab=createMaterialBottomTabNavigator();
 
 
@@ -15,6 +16,8 @@ const AdminFinal = () => {
     return (
         <NavigationContainer>
         <Tab.Navigator>
+        <Tab.Screen name="LostPets" component={LostPets} />
+
             <Tab.Screen name="FoundPets" component={FoundPets} />
             <Tab.Screen name="ReportFoundPet" component={ReportFoundPet} />
 
