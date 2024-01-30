@@ -3,26 +3,31 @@ import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, TextInpu
 import * as ImagePicker from 'expo-image-picker';
 import { RadioButton } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-import { setAlert,clearAlert } from '../../components/redux/alertSlice';
-
+import { setAlert, clearAlert } from '../../components/redux/alertSlice';
 
 const ReportFoundPet = ({}) => {
-  const [petType, setPetType] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [imageUri, setImageUri] = useState(null);
-  const [permissionStatus, setPermissionStatus] = useState(null);
-  const [isImageSelected, setIsImageSelected] = useState(false); // Track whether an image has been selected
-  const [reportType, setReportType] = useState(null); // Track the selected report type
-  const dispatch = useDispatch()
+  const [formData, setFormData] = useState({
+    petType: '',
+    description: '',
+    location: '',
+    imageUri: null,
+    permissionStatus: null,
+    isImageSelected: false,
+    reportType: null,
+  });
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
       const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      setPermissionStatus(galleryStatus.status === "granted");
+      setFormData((prevData) => ({ ...prevData, permissionStatus: galleryStatus.status === 'granted' }));
     })();
   }, []);
 
   const selectImage = async () => {
+    const { permissionStatus } = formData;
+
     if (permissionStatus) {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -31,31 +36,39 @@ const ReportFoundPet = ({}) => {
       });
 
       if (!result.cancelled) {
-        setImageUri(result.uri);
-        setIsImageSelected(true); // Set the flag to true when an image is selected
+        setFormData((prevData) => ({
+          ...prevData,
+          imageUri: result.uri,
+          isImageSelected: true,
+        }));
       } else {
-        console.log("Permission not granted");
+        console.log('Permission not granted');
       }
     }
   };
 
   const reportFoundPet = () => {
-    // Handle reporting logic with petType, description, location, and imageUri
-
+    const { petType, description, location, imageUri, reportType } = formData;
+  
+    // Check if any of the required values is null
+    if (!petType || !description || !location || !imageUri || !reportType) {
+      dispatch(setAlert('Please fill in all the required fields.'));
+      return; // Exit the function if any value is null
+    }
+  
+    // If all values are present, proceed with reporting logic
     console.log('Pet Type:', petType);
     console.log('Description:', description);
     console.log('Location:', location);
     console.log('Image URI:', imageUri);
     console.log('Report Type:', reportType);
-    dispatch(setAlert("pls help me find my dog"));
-
-    // // Optional: You can clear the alert after a certain duration
-    // setTimeout(() => {
-    //   dispatch(clearAlert());
-    // }, 5000); // Clear alert after 5 seconds (adjust as needed)
+  
+    // Optional: You can clear the alert after a certain duration
   };
   
-
+  const handleChange = (name, value) => {
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,31 +77,31 @@ const ReportFoundPet = ({}) => {
       </View>
       <View style={styles.body}>
         <View style={styles.imageContainer}>
-          {imageUri && (
-            <Image style={styles.image} source={{ uri: imageUri }} />
-          )}
+          {formData.imageUri && <Image style={styles.image} source={{ uri: formData.imageUri }} />}
           <TouchableOpacity onPress={selectImage}>
-            <Text style={styles.imagePlaceholderText}>{isImageSelected ? 'Change Image' : 'Select Image'}</Text>
+            <Text style={styles.imagePlaceholderText}>
+              {formData.isImageSelected ? 'Change Image' : 'Select Image'}
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
             placeholder="Pet Type"
-            value={petType}
-            onChangeText={(text) => setPetType(text)}
+            value={formData.petType}
+            onChangeText={(text) => handleChange('petType', text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Description"
-            value={description}
-            onChangeText={(text) => setDescription(text)}
+            value={formData.description}
+            onChangeText={(text) => handleChange('description', text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Location"
-            value={location}
-            onChangeText={(text) => setLocation(text)}
+            value={formData.location}
+            onChangeText={(text) => handleChange('location', text)}
           />
         </View>
         <View style={styles.radioContainer}>
@@ -97,8 +110,8 @@ const ReportFoundPet = ({}) => {
             <View style={styles.radioButton}>
               <RadioButton
                 value="lostDog"
-                status={reportType === 'lostDog' ? 'checked' : 'unchecked'}
-                onPress={() => setReportType('lostDog')}
+                status={formData.reportType === 'lostDog' ? 'checked' : 'unchecked'}
+                onPress={() => handleChange('reportType', 'lostDog')}
                 color="#FF6F61"
               />
               <Text style={styles.radioLabel}>I have lost a dog</Text>
@@ -106,8 +119,8 @@ const ReportFoundPet = ({}) => {
             <View style={styles.radioButton}>
               <RadioButton
                 value="foundPet"
-                status={reportType === 'foundPet' ? 'checked' : 'unchecked'}
-                onPress={() => setReportType('foundPet')}
+                status={formData.reportType === 'foundPet' ? 'checked' : 'unchecked'}
+                onPress={() => handleChange('reportType', 'foundPet')}
                 color="#47B4FF"
               />
               <Text style={styles.radioLabel}>I have found a pet dog</Text>
@@ -123,12 +136,12 @@ const ReportFoundPet = ({}) => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
     padding: 16,
+    marginTop: 40,
   },
   header: {
     marginBottom: 20,

@@ -17,6 +17,8 @@ const UserFinal=()=>{
         <NavigationContainer>
         
         <Tab.Navigator>
+        <Tab.Screen name="lostpets" component={LostPets}/>
+
             <Tab.Screen name="foundpets" component={FoundPets}/>
             <Tab.Screen name="report" component={ReportFoundPet}/>
         </Tab.Navigator>
